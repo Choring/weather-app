@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import axios from 'axios';
 import WeatherBox from './components/WeatherBox';
 import WeatherButton from './components/WeatherButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,8 +19,6 @@ function App() {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
 
-      console.log("현재 위치는", lat, lon);
-
       getWeatherByCurrentLocation(lat,lon)
     });
   }
@@ -31,13 +28,12 @@ function App() {
     let response = await fetch(url);
     let data = await response.json();
     setWeather(data);
-    
   }
 
   useEffect(() => {
     getCurrentLocation();
 
-  }, [])
+  });
 
   return (
     <>
