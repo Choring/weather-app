@@ -3,7 +3,7 @@ import './App.css';
 import WeatherBox from './components/WeatherBox';
 import WeatherButton from './components/WeatherButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import ClipLoader from "react-spinners/ClipLoader";
 // 1. 앱이 실행되자마자 현재 위치기반의 날씨 제공
 // 2. 날씨 정보에는 도시, 섭씨, 화씨, 날씨상태 정보 제공
 // 3. 5개의 버튼이 있다.(1개는 현재도시, 4개는 다른도시)
@@ -14,6 +14,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [weather, setWeather] = useState(null);
+  const cities = ["paris", "new york", "tokyo", "seoul"];
+  const [city, setCity] = useState("");
+  let [loading, setLoading] = useState(true);
+  
   const getCurrentLocation= () => {
     navigator.geolocation.getCurrentPosition(async (position) => {
       let lat = position.coords.latitude;
@@ -25,21 +29,37 @@ function App() {
 
   const getWeatherByCurrentLocation = async(lat,lon) => {
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=0bedb45c75711fa3349b7114b5743974&units=metric`;
+    setLoading(true);
     let response = await fetch(url);
     let data = await response.json();
     setWeather(data);
+    setLoading(false);
+  }
+
+  const getWeatherByCity = async() => {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0bedb45c75711fa3349b7114b5743974&units=metric`;
+    setLoading(true);
+    let response = await fetch(url);
+    let data = await response.json();
+    setWeather(data);
+    setLoading(false);
   }
 
   useEffect(() => {
-    getCurrentLocation();
-
-  });
+    city === "" ? getCurrentLocation() : getWeatherByCity();
+  },[city]);
 
   return (
     <>
       <div className="container">
+        {loading ? <ClipLoader
+        color={"#f88c6b"}
+        loading={loading}
+        size={150}
+        /> :
         <WeatherBox weather={weather} />
-        <WeatherButton />
+        }
+        <WeatherButton cities={cities} setCity={setCity} />
       </div>
     </>
   );
