@@ -66,14 +66,20 @@ function App() {
     <>
     {(handleError == "" ) ? 
       <div className="container">
-        {loading ? <ClipLoader
-          color={"#f88c6b"}
-          loading={loading}
-          size={150}
-          /> :
-          <WeatherBox weather={weather} />
-        }
         <WeatherButton cities={cities} setCity={setCity} />
+        <div className="weather-container">
+          {loading ? 
+            <div className="loading-box">
+              <ClipLoader
+              color={"#f88c6b"}
+              loading={loading}
+              size={150}
+              />
+            </div>
+             :
+            <WeatherBox weather={weather} />
+          }
+        </div>
       </div>
     : <h3>{handleError}</h3>}
     </>

@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const ButtonContainer = styled.div`
-    margin-top: 30px;
     display: flex;
     gap: 6px;
+    flex-direction : column;
+    margin-right: 30px;
 `
 
 
