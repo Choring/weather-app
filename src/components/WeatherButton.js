@@ -15,9 +15,9 @@ const WeatherButton = ({cities, setCity}) => {
 
   return (
     <ButtonContainer>
-        <Button variant={active === "current" ? "danger" : "warning"} onClick={handleClick} value="current">Current Location</Button>
+        <Button variant={active === "current" ? "danger" : "warning"} onClick={handleClick} value="current">현재위치</Button>
         {cities.map((item, index) => (
-          <Button variant={item === active ? "danger" : "warning"} key={index} onClick={handleClick} value={item}>{item}</Button>
+          <Button variant={item.value === active ? "danger" : "warning"} key={index} onClick={handleClick} value={item.value}>{item.name}</Button>
         ))}
     </ButtonContainer>
   )

@@ -14,7 +14,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
   const [weather, setWeather] = useState(null);
-  const cities = ["paris", "new york", "tokyo", "seoul"];
+  const cities = [{value:"paris", name:"파리"}, {value:"new york", name:"뉴욕"}, {value:"tokyo", name:"도쿄"}, {value:"seoul", name:"서울"}];
   const [city, setCity] = useState("current");
   const [loading, setLoading] = useState(true);
   let [handleError, setHandleError] = useState("");
