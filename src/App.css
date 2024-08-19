@@ -4,13 +4,23 @@ body {
   background-size: cover;
   height: 100vh;
 }
+#root {
+  height: 100%;
+  @media screen and (max-width:490px) {
+    display:flex;
+    align-items:center;
+  }
+}
 
 .container {
   display:flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  /* flex-direction: column; */
+  height: 100%;
+  flex-wrap: wrap;
+  @media screen and (max-width: 490px) {
+    height: auto;
+  }
 }
 
 .weather-container {
